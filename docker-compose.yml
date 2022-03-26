@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 volumes:
   mysql-volume:
@@ -40,6 +40,19 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
     volumes:
       - mysql-volume:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST:'mysql'
+      - PMA_USER:'${DB_USER}'
+      - PMA_PASSWORD:'${DB_ROOT_PASSWORD}'
+    links:
+      - mysql
+    ports:
+      - 8080:80
+    depends_on:
+      - db
