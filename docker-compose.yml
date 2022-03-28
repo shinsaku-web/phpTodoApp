@@ -43,13 +43,14 @@ services:
       TZ: "Asia/Tokyo"
     volumes:
       - mysql-volume:/var/lib/mysql
+    container_name: myapp
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      - PMA_HOST:'mysql'
-      - PMA_USER:'${DB_USER}'
-      - PMA_PASSWORD:'${DB_ROOT_PASSWORD}'
+      - PMA_HOST:mysql
+      # - PMA_USER:${DB_USER}
+      # - PMA_PASSWORD:${DB_PASSWORD}
     links:
       - mysql
     ports:
