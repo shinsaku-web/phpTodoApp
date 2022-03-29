@@ -1,23 +1,4 @@
 <?php
-// function connect_db()
-// {
-//     try {
-//         //code...
-//         $dbh = new PDO('mysql:host=myapp;dbname=todo_app', 'root', 'root');
-//         $dbh->query('SET NAMES utf8;');
-
-//         $sth = $dbh->query('SELECT * FROM todos');
-//         $sth->execute();
-//         $tasks = $sth->fetchAll();
-//         unset($dbh);
-//     } catch (\Throwable $th) {
-//         //throw $th;
-//         echo '捕捉した例外: ',  $th->getMessage(), "\n";
-//         exit();
-//     }
-// }
-
-// connect_db();
 
 try {
     //code...
@@ -95,7 +76,7 @@ try {
                     <tr>
                         <td><?php echo htmlspecialchars($task['name']) ?></td>
                         <td>
-                            <a href="/show.php?data=<?= $task['id'] ?>">詳細</a>
+                            <a href="/show.php?task=<?= $task['id'] ?>">詳細</a>
                             <a href="">編集</a>
                             <a href="">削除</a>
                         </td>

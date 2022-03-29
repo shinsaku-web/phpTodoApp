@@ -1,5 +1,5 @@
 <?php
-$pageid = $_GET['data'];
+$pageid = $_GET['task'];
 try {
     //code...
     $dbh = new PDO('mysql:host=myapp;dbname=todo_app', 'root', 'root');
