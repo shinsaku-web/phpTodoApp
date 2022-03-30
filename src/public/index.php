@@ -18,7 +18,7 @@ try {
         $sth->bindParam(':name', $post_name, PDO::PARAM_STR);
         $sth->bindParam(':content', $post_content, PDO::PARAM_STR);
     }
-    $sth = $dbh->query('SELECT * FROM todos');
+    $sth = $dbh->prepare('SELECT * FROM todos');
     $sth->execute();
     $tasks = $sth->fetchAll();
     unset($dbh);
@@ -75,8 +75,13 @@ try {
             text-align: center;
         }
 
-        a {
+        a,
+        form {
             margin-right: 20px;
+        }
+
+        form {
+            display: inline;
         }
     </style>
 </head>
@@ -99,7 +104,10 @@ try {
                         <td>
                             <a href="/show.php?task=<?= $task['id'] ?>">詳細</a>
                             <a href="">編集</a>
-                            <a href="">削除</a>
+                            <form action="./tasks/delete.php" method="post">
+                                <input type="hidden" name="id" value="<?= $task['id'] ?>">
+                                <input type="submit" value="削除">
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach ?>

@@ -92,7 +92,10 @@ try {
                 <a href="">編集する</a>
             </div>
             <div class="link__delete">
-                <a href="">削除する</a>
+                <form action="./tasks/delete.php" method="post">
+                    <input type="hidden" name="id" value="<?= $pageid; ?>">
+                    <input type="submit" value="削除する">
+                </form>
             </div>
         </div>
     </div>
