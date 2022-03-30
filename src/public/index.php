@@ -9,6 +9,8 @@ try {
     $post_name = htmlspecialchars($_POST["name"]);
     $post_content = htmlspecialchars($_POST["content"]);
 
+    // echo $post_name, $post_content;
+
     if ($post_name !== "") {
         $sth = $dbh->prepare("INSERT INTO todos (
 	    name, content
@@ -17,6 +19,7 @@ try {
         )");
         $sth->bindParam(':name', $post_name, PDO::PARAM_STR);
         $sth->bindParam(':content', $post_content, PDO::PARAM_STR);
+        $sth->execute();
     }
     $sth = $dbh->prepare('SELECT * FROM todos');
     $sth->execute();
