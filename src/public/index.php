@@ -5,6 +5,19 @@ try {
     $dbh = new PDO('mysql:host=myapp;dbname=todo_app', 'root', 'root');
     $dbh->query('SET NAMES utf8;');
 
+    // タスク追加処理
+    $post_name = htmlspecialchars($_POST["name"]);
+    $post_content = htmlspecialchars($_POST["content"]);
+
+    if ($post_name !== "") {
+        $sth = $dbh->prepare("INSERT INTO todos (
+	    name, content
+        ) VALUES (
+            :name, :content
+        )");
+        $sth->bindParam(':name', $post_name, PDO::PARAM_STR);
+        $sth->bindParam(':content', $post_content, PDO::PARAM_STR);
+    }
     $sth = $dbh->query('SELECT * FROM todos');
     $sth->execute();
     $tasks = $sth->fetchAll();
@@ -34,6 +47,11 @@ try {
         .container {
             width: 80%;
             margin: 0 auto;
+        }
+
+        .task__add {
+            text-align: right;
+            padding-bottom: 10px;
         }
 
         table {
@@ -66,6 +84,9 @@ try {
 <body>
     <h1>タスク一覧</h1>
     <div class="container">
+        <div class="task__add">
+            <a href="/tasks/add.php">＋タスクを追加する</a>
+        </div>
         <?php if ($tasks) : ?>
             <table>
                 <tr>

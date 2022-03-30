@@ -65,7 +65,7 @@ try {
         <table>
             <tr>
                 <th>ID</th>
-                <td><?php echo $_GET['data']; ?></td>
+                <td><?php echo $_GET['task']; ?></td>
             </tr>
             <tr>
                 <th>タスク</th>
@@ -78,12 +78,10 @@ try {
             <tr>
                 <th>作成日時</th>
                 <td><?php echo htmlspecialchars($task['created']) ?></td>
-                <!-- <td>{{ $task->created_at->format('Y年m月d日 H:i') }}</td> -->
             </tr>
             <tr>
                 <th>更新日時</th>
                 <td><?php echo htmlspecialchars($task['updated']) ?></td>
-                <!-- <td>{{ $task->updated_at->format('Y年m月d日 H:i') }}</td> -->
             </tr>
         </table>
         <div class="link">
