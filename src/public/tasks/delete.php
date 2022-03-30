@@ -9,12 +9,20 @@ try {
     $delete_id = htmlspecialchars($_POST["id"]);
 
     if ($delete_id !== "") {
+        $sth = $dbh->prepare("SELECT name FROM todos WHERE id=:id");
+        $sth->bindParam(':id', $delete_id, PDO::PARAM_STR);
+        $sth->execute();
+        $delete_name = $sth->fetch();
+        var_dump($delete_name);
         $sth = $dbh->prepare("DELETE FROM todos WHERE id=:id");
         $sth->bindParam(':id', $delete_id, PDO::PARAM_STR);
+        $sth->execute();
     }
-    $sth->execute();
-    // $tasks = $sth->fetchAll();
-    echo "削除しました";
+    if ($delete_name) {
+        echo "タスク名：.$delete_name.を削除しました";
+    } else {
+        echo "削除失敗";
+    }
     unset($dbh);
 } catch (\Throwable $th) {
     //throw $th;
